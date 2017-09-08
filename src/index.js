@@ -8,13 +8,24 @@ class App extends Component {
     super(props);
 
     this.state={recipes: [] }
+
+    this.getRecipes(JSON.parse(localStorage.getItem("recipes")))
   };
 
-  getRecipes = (recipes) => {
-    var recipeList = localStorage.getItem('recipeList');
-    recipeList = [] ? localStorage.setItem("recipeList", [{name: "Kongo Bar", ingredients: "greham crumbs"},{name: "Gravlax", ingredients: "Salmon"}])
-    : this.setState()
-        
+  SetRecipes = (recipes) => this.setState({recipes}) | console.log(this.recipes)
+
+  getRecipes = (recipeSet) => {
+    !recipeSet ? 
+      localStorage.recipes = JSON.stringify(stockRecipes)
+      : console.log(recipeSet) | console.log(this.state.recipes)      
+  }
+
+  setRecipes = (recipe) => {
+
+  }
+
+  removeRecipes = (recipe) => {
+
   }
 
   render() {
@@ -26,6 +37,27 @@ class App extends Component {
   }
 
 }
+
+var stockRecipes = [
+  { name: "Kongo Bar", 
+    ingredients: [
+      "Greham Crumbs",
+      "Condenced Milk",
+      "Butter"
+    ],
+    instructions: []
+  },
+  { name: "Gravlax", 
+    ingredients: [
+      "Salmon",
+      "Sea Salt",
+      "4 Table Spoons of Vodka",
+      "Coriander",
+      "Olive Oil",
+      "Dill"
+    ],
+    instructions: []
+  }];
 
 ReactDOM.render(<App />, 
 document.querySelector('.container'));
