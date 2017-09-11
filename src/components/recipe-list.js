@@ -4,10 +4,12 @@ import Recipe from './recipe-items.js';
 
 const RecipeList = (props) => {
 
+    var name = localStorage.recipes[0].name;
+
     return (
         <div> Recipes
             <Accordion>
-        <Panel header="Kongo Bar" eventKey="1">
+        <Panel header={ props.Recipes[0].name } eventKey="1">
             <h2>Ingredients</h2>
             <ul>
                 <li>Graham Crumbs</li>
@@ -38,6 +40,7 @@ const RecipeList = (props) => {
             </ButtonGroup>
         </div>
     )
+    console.log(this.state.recipes)
 
 }
 

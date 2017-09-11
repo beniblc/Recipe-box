@@ -7,31 +7,31 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state={recipes: [] }
-
-    this.getRecipes(JSON.parse(localStorage.getItem("recipes")))
+    this.state={recipes: JSON.parse(localStorage.getItem("recipes")) }
   };
 
   SetRecipes = (recipes) => this.setState({recipes}) | console.log(this.recipes)
 
   getRecipes = (recipeSet) => {
     !recipeSet ? 
-      localStorage.recipes = JSON.stringify(stockRecipes)
+      (localStorage.recipes = JSON.stringify(stockRecipes) , console.log(this.state.recipes))
       : console.log(recipeSet) | console.log(this.state.recipes)      
-  }
-
-  setRecipes = (recipe) => {
-
   }
 
   removeRecipes = (recipe) => {
 
   }
 
+  recipeCheck = () => {
+
+  }
+
   render() {
+    this.getRecipes(localStorage.recipes)
     return(
       <div>
-        <RecipeList />
+        <RecipeList 
+          Recipes = { this.state.recipes } />
       </div>
     )
   }
