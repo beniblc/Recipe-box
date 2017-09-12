@@ -3,27 +3,44 @@ import {Accordion, Panel, Button, ButtonGroup} from 'react-bootstrap';
 
 const Recipe = (props) => {
 
-    mapList = (item) => {
-        item.map(() => item)
-    }
+    const recipeGenerator =JSON.parse(localStorage.recipes).map((recipe, i) => {
+
+        return (
+            <Panel header={recipe.name} eventKey={recipe.name} key={recipe.name}>
+                <h2>Ingredients</h2>
+                <ul>
+                    {recipe.ingredients.map((item)=> {
+                        return (
+                            <li key={item}>{item}</li>
+                        )
+                    })}
+                </ul>
+                <h2>Instructions</h2>
+                <ol>
+                    {recipe.instructions.map((item)=> {
+                        return (
+                            <li key={item}>{item}</li>
+                        )
+                    })}
+                </ol>
+                <ButtonGroup>
+                    <Button bsStyle="default" bsSize="small">edit</Button>
+                    <Button bsSize="small">delete</Button>
+                </ButtonGroup>
+            </Panel>   
+        )
+    });
 
     return (
-        <Panel header={props.name} eventKey="1">
-        <h2>Ingredients</h2>
-        <ul>
-            { mapList() }
-        </ul>
-        <h2>Instructions</h2>
-        <ol>
-            { mapList() }
-        </ol>
-        <ButtonGroup>
-            <Button bsStyle="default" bsSize="small">edit</Button>
-            <Button bsSize="small">delete</Button>
-        </ButtonGroup>
-    </Panel>
+        <div>
+            <Accordion>
+                { recipeGenerator }
+            </Accordion>
+            <ButtonGroup>
+                <Button bsStyle="default" bsSize="small">Add Recipe</Button>                
+            </ButtonGroup>
+        </div>
     )
-
 }
 
 export default Recipe;
