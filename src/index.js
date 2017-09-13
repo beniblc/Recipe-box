@@ -7,15 +7,13 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state={recipes: stockRecipes }
+    this.state={recipes: undefined }
   };
 
   SetRecipes = (recipes) => this.setState({recipes}) | console.log(this.recipes)
 
   getRecipes = (recipeSet) => {
-    !recipeSet ? 
-      localStorage.recipes = JSON.stringify(stockRecipes)
-      : console.log(this.state.recipes)      
+    !recipeSet ? localStorage.recipes = JSON.stringify(stockRecipes) : console.log('set')  
   }
 
   removeRecipes = (recipe) => {
@@ -27,7 +25,7 @@ class App extends Component {
   }
 
   render() {
-    this.getRecipes(localStorage.recipes)
+    {console.log(this.state.recipes)}    
     return(
       <div>
         <RecipeList 
@@ -36,6 +34,12 @@ class App extends Component {
     )
   }
 
+  componentWillMount() {
+    this.getRecipes(localStorage.recipes)
+    this.setState({
+      recipes: JSON.parse(localStorage.recipes)
+    })
+  }
 }
 
 var stockRecipes = [
