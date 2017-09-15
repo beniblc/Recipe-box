@@ -8,13 +8,21 @@ class App extends Component {
     super(props);
 
     this.state={recipes: undefined }
-  };
+  }
+
+  componentWillMount() {
+    
+    const getRecipes = (recipeSet) => {
+      !recipeSet ? localStorage.recipes = JSON.stringify(stockRecipes) : console.log('set')
+    }
+
+    getRecipes(localStorage.recipes)
+    this.setState({
+      recipes: JSON.parse(localStorage.recipes)
+    })
+  }
 
   SetRecipes = (recipes) => this.setState({recipes}) | console.log(this.recipes)
-
-  getRecipes = (recipeSet) => {
-    !recipeSet ? localStorage.recipes = JSON.stringify(stockRecipes) : console.log('set')  
-  }
 
   removeRecipes = (recipe) => {
     
@@ -32,13 +40,6 @@ class App extends Component {
           Recipes = { this.state.recipes } />
       </div>
     )
-  }
-
-  componentWillMount() {
-    this.getRecipes(localStorage.recipes)
-    this.setState({
-      recipes: JSON.parse(localStorage.recipes)
-    })
   }
 }
 

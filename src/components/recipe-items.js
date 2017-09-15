@@ -1,5 +1,6 @@
 import React from 'react';
 import {Accordion, Panel, Button, ButtonGroup} from 'react-bootstrap';
+import RecipeAdd from './recipe-add';
 
 const Recipe = (props) => {
 
@@ -37,7 +38,7 @@ const Recipe = (props) => {
                 { recipeGenerator }
             </Accordion>
             <ButtonGroup>
-                <Button bsStyle="default" bsSize="small">Add Recipe</Button>                
+                <Button bsStyle="default" bsSize="small" onClick={() => {this.RecipeAdd; console.log('ok')}} >Add Recipe</Button>                
             </ButtonGroup>
         </div>
     )
