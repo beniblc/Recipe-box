@@ -37,7 +37,8 @@ class App extends Component {
     return(
       <div>
         <RecipeList 
-          Recipes = { this.state.recipes } />
+          Recipes = { this.state.recipes }
+           />
       </div>
     )
   }
