@@ -7,6 +7,9 @@ const RecipeList = (props) => {
     return (
         <div> Recipes
             <Recipe Recipes = { props.Recipes }/>   
+            <ButtonGroup>
+                    <Button bsStyle="primary" bsSize="small" onClick={() => {props.On(); console.log('ok')}} >Add Recipe</Button>                
+            </ButtonGroup>
         </div>
     )
 }

@@ -7,7 +7,10 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state={recipes: undefined }
+    this.state={
+      recipes: undefined,
+      showModal: false
+    }
   }
 
   componentWillMount() {
@@ -24,20 +27,47 @@ class App extends Component {
 
   SetRecipes = (recipes) => this.setState({recipes}) | console.log(this.recipes)
 
-  removeRecipes = (recipe) => {
-    
+  ModalOn = () => {
+    this.setState({ showModal: true });
+    console.log(this.state.showModal) 
   }
 
-  recipeCheck = () => {
+  ModalOff = () => {
+    this.setState({ showModal: false });
+    console.log(this.state.showModal) 
+  }
 
+  RecipeAdd = () => {
+  
+    return (
+        <div className="static-modal">
+        <Modal show={this.state.showModal} onHide={this.ModalOff}>
+          <Modal.Header>
+            <Modal.Title>Modal Title</Modal.Title>
+          </Modal.Header>
+    
+          <Modal.Body>
+            One fine body...
+          </Modal.Body>
+    
+          <Modal.Footer>
+            <Button>Close</Button>
+            <Button bsStyle="primary">Save changes</Button>
+          </Modal.Footer>
+    
+        </Modal>
+      </div>
+    )
   }
 
   render() {
     {console.log(this.state.recipes)}    
     return(
       <div>
+        {this.RecipeAdd}
         <RecipeList 
           Recipes = { this.state.recipes }
+          On = {this.ModalOn}
            />
       </div>
     )

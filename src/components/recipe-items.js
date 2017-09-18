@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Accordion, Panel, Button, ButtonGroup} from 'react-bootstrap';
-import RecipeAdd from './recipe-add';
 
 class Recipe extends Component {
 
@@ -9,10 +8,6 @@ class Recipe extends Component {
 
         this.state={ showModal: false }
     }
-
-    ModalOn = () => this.setState({showModel: true})
-
-    ModalOff = () => this.setState({showModel: false})
 
     recipeGenerator = JSON.parse(localStorage.recipes).map((recipe, i) => {
 
@@ -42,37 +37,12 @@ class Recipe extends Component {
         )
     });
 
-    RecipeAdd = () => {
-        return (
-            <div className="static-modal">
-            <Modal.Dialog>
-              <Modal.Header>
-                <Modal.Title>Modal title</Modal.Title>
-              </Modal.Header>
-        
-              <Modal.Body>
-                One fine body...
-              </Modal.Body>
-        
-              <Modal.Footer>
-                <Button>Close</Button>
-                <Button bsStyle="primary">Save changes</Button>
-              </Modal.Footer>
-        
-            </Modal.Dialog>
-          </div>
-        )
-    }
-
     render() {
         return (
             <div>
                 <Accordion>
                     { this.recipeGenerator }
                 </Accordion>
-                <ButtonGroup>
-                    <Button bsStyle="default" bsSize="small" onClick={() => {this.ModalOn; console.log('ok')}} >Add Recipe</Button>                
-                </ButtonGroup>
             </div>
         )
     }
