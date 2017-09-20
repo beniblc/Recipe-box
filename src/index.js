@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import RecipeList from './components/recipe-list';
+import { Acordion } from 'react-bootstrap';
+
+import RecipeList from './components/list';
+import ModalForm from './components/modal-form';
 
 class App extends Component {
 
@@ -8,13 +11,11 @@ class App extends Component {
     super(props);
 
     this.state={
-      recipes: undefined,
-      showModal: false
-    }
+      recipes: undefined
+    } 
   }
 
-  componentWillMount() {
-    
+  componentWillMount() {  
     const getRecipes = (recipeSet) => {
       !recipeSet ? localStorage.recipes = JSON.stringify(stockRecipes) : console.log('set')
     }
@@ -22,57 +23,22 @@ class App extends Component {
     getRecipes(localStorage.recipes)
     this.setState({
       recipes: JSON.parse(localStorage.recipes)
-    })
-  }
-
-  SetRecipes = (recipes) => this.setState({recipes}) | console.log(this.recipes)
-
-  ModalOn = () => {
-    this.setState({ showModal: true });
-    console.log(this.state.showModal) 
-  }
-
-  ModalOff = () => {
-    this.setState({ showModal: false });
-    console.log(this.state.showModal) 
-  }
-
-  RecipeAdd = () => {
-  
-    return (
-        <div className="static-modal">
-        <Modal show={this.state.showModal} onHide={this.ModalOff}>
-          <Modal.Header>
-            <Modal.Title>Modal Title</Modal.Title>
-          </Modal.Header>
-    
-          <Modal.Body>
-            One fine body...
-          </Modal.Body>
-    
-          <Modal.Footer>
-            <Button>Close</Button>
-            <Button bsStyle="primary">Save changes</Button>
-          </Modal.Footer>
-    
-        </Modal>
-      </div>
-    )
+    }) 
   }
 
   render() {
-    {console.log(this.state.recipes)}    
+    console.log(this.state.recipes)
     return(
-      <div>
-        {this.RecipeAdd}
-        <RecipeList 
-          Recipes = { this.state.recipes }
-          On = {this.ModalOn}
-           />
+      <div className="container"> 
+        <RecipeList Recipes = { this.state.recipes }/>   
+        <ModalForm />
       </div>
-    )
+    ) 
   }
 }
+
+ReactDOM.render(<App />, 
+document.querySelector('.container'));
 
 var stockRecipes = [
   { name: "Kongo Bar", 
@@ -94,6 +60,3 @@ var stockRecipes = [
     ],
     instructions: []
   }];
-
-ReactDOM.render(<App />, 
-document.querySelector('.container'));

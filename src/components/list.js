@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
 import {Accordion, Panel, Button, ButtonGroup} from 'react-bootstrap';
 
-class Recipe extends Component {
+const RecipeList = (props) => {
 
-    constructor() {
-        super();
-
-        this.state={ showModal: false }
-    }
-
-    recipeGenerator = JSON.parse(localStorage.recipes).map((recipe, i) => {
+    const recipeGenerator = (props.Recipes).map((recipe) => {
 
         return (
             <Panel header={recipe.name} eventKey={recipe.name} key={recipe.name}>
@@ -37,15 +31,15 @@ class Recipe extends Component {
         )
     });
 
-    render() {
-        return (
-            <div>
-                <Accordion>
-                    { this.recipeGenerator }
-                </Accordion>
-            </div>
-        )
-    }
+    return (
+        <div>
+            <h1>Recipes</h1>
+            <Accordion>
+                { recipeGenerator }
+            </Accordion>
+        </div>
+    )
+    
 }
 
-export default Recipe;
+export default RecipeList;
