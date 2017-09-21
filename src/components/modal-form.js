@@ -9,9 +9,8 @@ class ModalForm extends Component {
         this.state={
             showModal: false,
             currentRecipe: {name: 'title', ingredients: [], instructions: []},
-            nameVal: '',
-            ingredientVal: '',
-            instructionVal: '' 
+            value: ''
+
         };
         this.open = this.open.bind(this);
         this.close = this.close.bind(this);
@@ -28,8 +27,13 @@ class ModalForm extends Component {
     }
 
     handleChange(event) {
-        this.setState({})
+        this.setState({value: event.target.value})
     }
+
+    handleSubmit(event) {
+        alert('Your favorite flavor is: ' + this.state.value);
+        event.preventDefault();
+    }    
 
     ChangeCurrentRecipe = (item) => {
         this.setState({cureentRecipe: item})
@@ -47,7 +51,7 @@ class ModalForm extends Component {
 
             <Modal show={this.state.showModal} onHide={this.close}>
                     <Modal.Header>
-                        <Modal.Title><input value={this.state.currentRecipe.name} onChange={event => this.event.target.value}/></Modal.Title>
+                        <Modal.Title><input value={this.state.currentRecipe.name} onChange={this.handleChange}/></Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <h3>Ingredients</h3>
@@ -62,7 +66,7 @@ class ModalForm extends Component {
                             <input 
                                 className=" box1" 
                                 value={this.state.term}
-                                onChange={event => this.event.target.value}
+                                onChange={this.handleChange}
                             />
                             <Button onClick={console.log(this.state.value)} bsSize="small">Add</Button>
                         </form>
@@ -79,13 +83,13 @@ class ModalForm extends Component {
                             <textarea 
                                 className=" box2" 
                                 value={this.state.term}
-                                onChange={event => this.event.target.value}
+                                onChange={this.handleChange}
                             />
                             <Button onClick={console.log(this.state.value)} bsSize="small">Add</Button>
                         </form>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button onClick={console.log(this.close)}>Save</Button>
+                        <Button onClick={this.handleChange}>Save</Button>
                     </Modal.Footer>
             </Modal>                
         </ButtonGroup>
