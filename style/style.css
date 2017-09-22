@@ -1,3 +1,4 @@
 .box1, .box2 {
     width:100%;
+    z-index: 1;
 }
