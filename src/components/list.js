@@ -6,7 +6,7 @@ const RecipeList = (props) => {
     const recipeGenerator = (props.Recipes).map((recipe) => {
 
         return (
-            <Panel header={recipe.name} eventKey={recipe.name} key={recipe.name}>
+            <Panel header={recipe.title} eventKey={recipe.title} key={recipe.title}>
                 <h2>Ingredients</h2>
                 <ul>
                     {recipe.ingredients.map((item)=> {

@@ -4,12 +4,12 @@ import update from 'immutability-helper';
 
 class ModalForm extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state={
             showModal: false,
-            currentRecipe: {title: 'test', ingredients: [], instructions: []},
+            currentRecipe: {title: [], ingredients: [], instructions: []},
             title: '',
             ingredients: '',
             instructions: ''
@@ -18,6 +18,26 @@ class ModalForm extends Component {
         this.open = this.open.bind(this);
         this.close = this.close.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+    }
+
+    assignAttribute = (ident) => {
+        var x = document.getElementById(ident).name;
+        var holder = this.state.currentRecipe;
+        var temp = null;
+
+        var check = holder[x].findIndex(el => el === this.state[x]);
+
+        x == 'title' ?  temp = update(holder, {[x]: {$set: [this.state[x]] }}) 
+        : x == 'ingredients' ? temp = update(holder, {[x]: {$push: [this.state[x]] }}) 
+        : temp = update(holder, {[x]: {$push: [this.state[x]] }})
+
+        check == -1 ? holder = temp : console.log('already exists')
+
+        console.log(holder)
+        
+        this.setState({ currentRecipe: holder})
+        
+        x == 'title' ? console.log('no change') : this.setState({[x]: '' })
     }
 
     close() {
@@ -36,33 +56,7 @@ class ModalForm extends Component {
         this.setState({
           [name]: value
         });
-    }
-
-    assignAttribute = (ident) => {
-        var x = document.getElementById(ident).name;
-        var holder = this.state.currentRecipe;
-        var temp = null;
-        var change = this.state[x];
-        
-        x == 'title' ?  temp = update(holder, {[x]: {$set: this.state.title }}) 
-        : x == 'ingredients' ? temp = update(holder, {[x]: {$push: [this.state.ingredients] }}) 
-        : temp = update(holder, {[x]: {$push: [this.state.instructions] }})
-
-        holder = temp
-        this.setState({ currentRecipe: holder})
-        console.log(this.state.currentRecipe)
-        
     }    
-
-    testAttribute = (attribute) => {
-        var holder = this.state.currentRecipe;
-        var temp = update(holder, {name: {$set : attribute}});
-      
-        this.setState({
-          currentRecipe: temp,
-          title: attribute
-        });
-    }
       
     render() {
         return (
@@ -141,7 +135,7 @@ class ModalForm extends Component {
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={() => this.testAttribute('works') || console.log(this.state.currentRecipe)}>Save</Button>
+                    <Button onClick={() => this.props.AddRecipe(this.state.currentRecipe)}>Save</Button>
                 </Modal.Footer>
             </Modal>                
         </ButtonGroup>
