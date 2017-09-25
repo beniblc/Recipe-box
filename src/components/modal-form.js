@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Accordion, Panel, Button, ButtonGroup, Modal} from 'react-bootstrap';
+import {Button, ButtonGroup, Modal} from 'react-bootstrap';
 import update from 'immutability-helper';
 
 class ModalForm extends Component {

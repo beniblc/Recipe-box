@@ -34,12 +34,19 @@ class App extends Component {
     this.setState({recipes: temp}) 
   }
 
+  deleteRecipe = (item) => {
+    var holder = this.state.recipes;
+    var temp = holder.getIndex(el => el === item)
+
+    temp !== -1 ? console.log('remove') : console.log('not found')
+  }
+
   render() {
     console.log(this.state.recipes)
     return(
       <div className="container"> 
         <RecipeList Recipes = { this.state.recipes }/>   
-        <ModalForm AddRecipe = {this.addRecipe}/>
+        <ModalForm AddRecipe = {this.addRecipe }/>
       </div>
     ) 
   }

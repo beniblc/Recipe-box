@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Accordion, Panel, Button, ButtonGroup} from 'react-bootstrap';
+import {Accordion, Panel, Button, ButtonGroup, ListGroup, ListGroupItem} from 'react-bootstrap';
 
 const RecipeList = (props) => {
 
@@ -8,13 +8,13 @@ const RecipeList = (props) => {
         return (
             <Panel header={recipe.title} eventKey={recipe.title} key={recipe.title}>
                 <h2>Ingredients</h2>
-                <ul>
+                <ListGroup>
                     {recipe.ingredients.map((item)=> {
                         return (
-                            <li key={item}>{item}</li>
+                            <ListGroupItem key={item}>{item}</ListGroupItem>
                         )
                     })}
-                </ul>
+                </ListGroup>
                 <h2>Instructions</h2>
                 <ol>
                     {recipe.instructions.map((item)=> {
