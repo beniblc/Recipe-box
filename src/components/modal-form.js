@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button, ButtonGroup, Modal} from 'react-bootstrap';
+import {Button, ButtonGroup, Modal, FormControl} from 'react-bootstrap';
 import update from 'immutability-helper';
 
 class ModalForm extends Component {
@@ -70,20 +70,22 @@ class ModalForm extends Component {
 
             <Modal show={this.state.showModal} onHide={this.close}>
                 <Modal.Header>
-                    <Modal.Title>
-                        <input
-                            id="Title" 
-                            placeholder="Title"
-                            name="title" 
-                            value={this.state.title} 
-                            onChange={this.handleInputChange}
-                        />
-                    </Modal.Title>
-                    <Button 
-                        onClick={() => this.assignAttribute("Title")} 
-                        bsSize="small">
-                        Edit
-                    </Button>
+                    <FormControl inputRef={ref => { this.input = ref}}>
+                        <Modal.Title>
+                            <input
+                                id="Title" 
+                                placeholder="Title"
+                                name="title" 
+                                value={this.state.title} 
+                                onChange={this.handleInputChange}
+                            />                        
+                        </Modal.Title>
+                        <Button 
+                            onClick={() => this.assignAttribute("Title")} 
+                            bsSize="small">
+                            Edit
+                        </Button>
+                    </FormControl>
                 </Modal.Header>
                 <Modal.Body>
                     <h3>Ingredients</h3>

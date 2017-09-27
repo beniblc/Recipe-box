@@ -25,7 +25,7 @@ const RecipeList = (props) => {
                 </ol>
                 <ButtonGroup>
                     <Button bsStyle="default" bsSize="small">edit</Button>
-                    <Button bsSize="small">delete</Button>
+                    <Button bsSize="small" onClick={props.delete}>delete</Button>
                 </ButtonGroup>
             </Panel>   
         )

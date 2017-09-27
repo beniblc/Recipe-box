@@ -13,7 +13,8 @@ class App extends Component {
 
     this.state={
       recipes: undefined
-    } 
+    };
+    this.delete = this.delete.bind(this);
   }
 
   componentWillMount() {  
@@ -34,18 +35,20 @@ class App extends Component {
     this.setState({recipes: temp}) 
   }
 
-  deleteRecipe = (item) => {
-    var holder = this.state.recipes;
-    var temp = holder.getIndex(el => el === item)
-
-    temp !== -1 ? console.log('remove') : console.log('not found')
-  }
+  delete = (id) => {
+    this.setState(prevState => ({
+        recipes: prevState.recipes.filter(el => el != id )
+    }));
+    console.log(id);
+ }
 
   render() {
     console.log(this.state.recipes)
     return(
       <div className="container"> 
-        <RecipeList Recipes = { this.state.recipes }/>   
+        <RecipeList 
+          Recipes = { this.state.recipes }
+          delete={this.delete}/>   
         <ModalForm AddRecipe = {this.addRecipe }/>
       </div>
     ) 
