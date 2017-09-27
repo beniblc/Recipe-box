@@ -39,10 +39,10 @@ class App extends Component {
     this.setState(prevState => ({
         recipes: prevState.recipes.filter(el => el != id )
     }));
-    console.log(id);
- }
+  }
 
   render() {
+    localStorage.setItem('recipes', JSON.stringify(this.state.recipes));
     console.log(this.state.recipes)
     return(
       <div className="container"> 
@@ -61,7 +61,13 @@ class App extends Component {
         "Condenced Milk",
         "Butter"
       ],
-      instructions: []
+      instructions: [
+        "Put the butter into the frying pan and wait until the butter has melted.",
+        "Add the Greham Crumbs and mix with the butter until both have mixed.",
+        "Spread Greham Crumbs onto the bad so that it is evenly distributed at 1 cm high.",
+        "Spread Condensed Milk on top of the Greham Crumbs.",
+        "Bake for 20 minutes at 350 degrees Fahrenheit."
+      ]
     },
     { title: ["Gravlax"], 
       ingredients: [
