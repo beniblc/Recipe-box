@@ -9,7 +9,7 @@ class ModalForm extends Component {
 
         this.state={
             showModal: false,
-            currentRecipe: {title: [], ingredients: [], instructions: []},
+            currentRecipe: props.LiveRecipe,
             title: '',
             ingredients: '',
             instructions: ''
@@ -56,7 +56,20 @@ class ModalForm extends Component {
         this.setState({
           [name]: value
         });
-    }    
+    }
+    
+    delete = (id, cat) => {
+        var holder = this.state.currentRecipe;
+        var category = this.state.currentRecipe[cat].filter(el => el != id );
+        var temp = update(holder, {[cat]: {$set: category }});
+        this.setState({currentRecipe: temp})
+    }
+
+    handleKeyPress(target) {
+        if(target.charCode==13){
+                alert('Enter clicked!!!');    
+        }
+    }
       
     render() {
         return (
@@ -77,6 +90,7 @@ class ModalForm extends Component {
                             name="title" 
                             value={this.state.title} 
                             onChange={this.handleInputChange}
+                            onKeyPress={this.handleKeyPress}
                         />                        
                     </Modal.Title>
                     <Button 
@@ -90,7 +104,10 @@ class ModalForm extends Component {
                     <ul>
                         {this.state.currentRecipe.ingredients.map((item)=> {
                             return (
-                                <li key={item}>{item}</li>
+                                <form key={item}>
+                                    <li>{item}</li>
+                                    <Button bsSize="small" onClick={() => this.delete(item, 'ingredients')}>Delete</Button>
+                                </form>
                             )
                         })}
                     </ul>
@@ -102,6 +119,7 @@ class ModalForm extends Component {
                             className=" box1" 
                             value={this.state.ingredients}
                             onChange={this.handleInputChange}
+                            onKeyPress={this.handleKeyPress}
                         />
                         <Button 
                             onClick={() => this.assignAttribute("Ingredient")} 
@@ -114,7 +132,15 @@ class ModalForm extends Component {
                     <ol>
                         {this.state.currentRecipe.instructions.map((item)=> {
                             return (
-                                <li key={item}>{item}</li>
+                                <form key={item}>
+                                    <li>{item}</li>
+                                    <Button 
+                                        bsSize="small" 
+                                        onClick={
+                                            () => this.delete(item, 'instructions')
+                                        }>
+                                    Delete</Button>
+                                </form>
                             )
                         })}
                     </ol>
@@ -126,6 +152,7 @@ class ModalForm extends Component {
                             className="box2" 
                             value={this.state.instructions}
                             onChange={this.handleInputChange}
+                            onKeyPress={this.handleKeyPress}
                         />
                         <Button
                             onClick={() => this.assignAttribute("Instruction")} 
@@ -135,7 +162,15 @@ class ModalForm extends Component {
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={() => this.props.AddRecipe(this.state.currentRecipe)}>Save</Button>
+                    <Button onClick={
+                            () => this.props.AddRecipe(this.state.currentRecipe)
+                            || this.setState({
+                                currentRecipe: {title: [], ingredients: [], instructions: []},
+                                showModal: false
+                            })}
+                        onKeyPress={this.handleKeyPress}
+                    >
+                    Save</Button>
                 </Modal.Footer>
             </Modal>                
         </ButtonGroup>

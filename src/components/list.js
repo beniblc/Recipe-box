@@ -28,7 +28,7 @@ class RecipeList extends Component {
                     })}
                 </ol>
                 <ButtonGroup>
-                    <Button bsStyle="default" bsSize="small">edit</Button>
+                    <Button bsStyle="default" bsSize="small" onClick={() => this.props.getIt(recipe.title)}>edit</Button>
                     <Button bsSize="small" onClick={this.delete.bind(this, recipe)}>delete</Button>
                 </ButtonGroup>
             </Panel>   

@@ -12,7 +12,8 @@ class App extends Component {
     super(props);
 
     this.state={
-      recipes: undefined
+      recipes: undefined,
+      liveRecipe: {title: [], ingredients: [], instructions: []}
     };
     this.delete = this.delete.bind(this);
   }
@@ -32,7 +33,14 @@ class App extends Component {
     var holder = this.state.recipes;
     var temp = update(holder, {$push: [value]});
     localStorage.setItem('recipes', JSON.stringify(temp));
-    this.setState({recipes: temp}) 
+    this.setState({recipes: temp});
+  }
+
+  editRecipe = (value) => {
+    var getIt = this.state.recipes.filter(el => el.title == value);
+    this.setState({liveRecipe: getIt});
+    console.log('Booya')
+    console.log(getIt)
   }
 
   delete = (id) => {
@@ -48,8 +56,11 @@ class App extends Component {
       <div className="container"> 
         <RecipeList 
           Recipes = { this.state.recipes }
-          delete={this.delete}/>   
-        <ModalForm AddRecipe = {this.addRecipe }/>
+          delete={this.delete}
+          getIt = {this.editRecipe}/>   
+        <ModalForm
+          LiveRecipe = {this.state.liveRecipe}
+          AddRecipe = {this.addRecipe }/>
       </div>
     ) 
   }
