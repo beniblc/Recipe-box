@@ -29,6 +29,8 @@ class App extends Component {
     }) 
   }
 
+  setLive = (item) => {this.setState({liveRecipe: item})}
+
   addRecipe = (value) => {
     var holder = this.state.recipes;
     var temp = update(holder, {$push: [value]});
@@ -40,7 +42,7 @@ class App extends Component {
     var getIt = this.state.recipes.filter(el => el.title == value);
     this.setState({liveRecipe: getIt});
     console.log('Booya')
-    console.log(getIt)
+    console.log(this.state.liveRecipe)
   }
 
   delete = (id) => {
@@ -59,8 +61,9 @@ class App extends Component {
           delete={this.delete}
           getIt = {this.editRecipe}/>   
         <ModalForm
-          LiveRecipe = {this.state.liveRecipe}
-          AddRecipe = {this.addRecipe }/>
+          currentRecipe = {this.state.liveRecipe}
+          AddRecipe = {this.addRecipe }
+          SetLive = {this.setLive} />
       </div>
     ) 
   }

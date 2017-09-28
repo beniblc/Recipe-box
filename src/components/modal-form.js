@@ -9,7 +9,6 @@ class ModalForm extends Component {
 
         this.state={
             showModal: false,
-            currentRecipe: props.LiveRecipe,
             title: '',
             ingredients: '',
             instructions: ''
@@ -22,7 +21,7 @@ class ModalForm extends Component {
 
     assignAttribute = (ident) => {
         var x = document.getElementById(ident).name;
-        var holder = this.state.currentRecipe;
+        var holder = this.props.currentRecipe;
         var temp = null;
 
         var check = holder[x].findIndex(el => el === this.state[x]);
@@ -32,10 +31,8 @@ class ModalForm extends Component {
         : temp = update(holder, {[x]: {$push: [this.state[x]] }})
 
         check == -1 ? holder = temp : console.log('already exists')
-
-        console.log(holder)
         
-        this.setState({ currentRecipe: holder})
+        this.props.SetLive(holder)
         
         x == 'title' ? console.log('no change') : this.setState({[x]: '' })
     }
@@ -59,8 +56,8 @@ class ModalForm extends Component {
     }
     
     delete = (id, cat) => {
-        var holder = this.state.currentRecipe;
-        var category = this.state.currentRecipe[cat].filter(el => el != id );
+        var holder = this.props.currentRecipe;
+        var category = this.props.currentRecipe[cat].filter(el => el != id );
         var temp = update(holder, {[cat]: {$set: category }});
         this.setState({currentRecipe: temp})
     }
@@ -102,7 +99,7 @@ class ModalForm extends Component {
                 <Modal.Body>
                     <h3>Ingredients</h3>
                     <ul>
-                        {this.state.currentRecipe.ingredients.map((item)=> {
+                        {this.props.currentRecipe.ingredients.map((item)=> {
                             return (
                                 <form key={item}>
                                     <li>{item}</li>
@@ -130,7 +127,7 @@ class ModalForm extends Component {
                     <br/>
                     <h3>Instructions</h3>
                     <ol>
-                        {this.state.currentRecipe.instructions.map((item)=> {
+                        {this.props.currentRecipe.instructions.map((item)=> {
                             return (
                                 <form key={item}>
                                     <li>{item}</li>
@@ -163,9 +160,8 @@ class ModalForm extends Component {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={
-                            () => this.props.AddRecipe(this.state.currentRecipe)
+                            () => this.props.AddRecipe(this.props.currentRecipe)
                             || this.setState({
-                                currentRecipe: {title: [], ingredients: [], instructions: []},
                                 showModal: false
                             })}
                         onKeyPress={this.handleKeyPress}
