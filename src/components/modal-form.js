@@ -30,7 +30,7 @@ class ModalForm extends Component {
 
         check == -1 ? holder = temp : console.log('already exists')
         
-        this.props.SetLive(holder)
+        this.state[x] != '' ? this.props.SetLive(holder) : console.log('no input')
         
         x == 'title' ? console.log('here') : this.setState({[x]: '' })
     }
