@@ -14,8 +14,6 @@ class ModalForm extends Component {
             instructions: ''
         };
 
-        this.open = this.open.bind(this);
-        this.close = this.close.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
@@ -34,15 +32,7 @@ class ModalForm extends Component {
         
         this.props.SetLive(holder)
         
-        x == 'title' ? console.log('no change') : this.setState({[x]: '' })
-    }
-
-    close() {
-        this.setState({ showModal: false });
-    }
-  
-    open() {
-        this.setState({ showModal: true });
+        x == 'title' ? console.log('here') : this.setState({[x]: '' })
     }
 
     handleInputChange(event) {
@@ -59,7 +49,7 @@ class ModalForm extends Component {
         var holder = this.props.currentRecipe;
         var category = this.props.currentRecipe[cat].filter(el => el != id );
         var temp = update(holder, {[cat]: {$set: category }});
-        this.setState({currentRecipe: temp})
+        this.props.SetLive(temp)
     }
 
     handleKeyPress(target) {
@@ -73,12 +63,12 @@ class ModalForm extends Component {
         <ButtonGroup>
             <Button bsStyle="primary" 
                 bsSize="small" 
-                onClick={this.open.bind(this)} 
+                onClick={() => this.props.Open()} 
             >
                 Add Recipe
             </Button>
 
-            <Modal show={this.state.showModal} onHide={this.close}>
+            <Modal show={this.props.showModal} onHide={() => this.props.SetLive( {title: [], ingredients: [], instructions: []} ) || this.props.Close()}>
                 <Modal.Header>
                     <Modal.Title>
                         <input
@@ -161,9 +151,9 @@ class ModalForm extends Component {
                 <Modal.Footer>
                     <Button onClick={
                             () => this.props.AddRecipe(this.props.currentRecipe)
-                            || this.setState({
-                                showModal: false
-                            })}
+                            || this.props.SetLive( {title: [], ingredients: [], instructions: []} )
+                            || this.props.Close() 
+                        }       
                         onKeyPress={this.handleKeyPress}
                     >
                     Save</Button>

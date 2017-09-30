@@ -13,7 +13,9 @@ class App extends Component {
 
     this.state={
       recipes: undefined,
-      liveRecipe: {title: [], ingredients: [], instructions: []}
+      liveRecipe: {title: [], ingredients: [], instructions: []},
+      showModal: false,
+      existngRecipe: false
     };
     this.delete = this.delete.bind(this);
   }
@@ -31,17 +33,28 @@ class App extends Component {
 
   setLive = (item) => {this.setState({liveRecipe: item})}
 
+  close = () => {
+    this.setState({ showModal: false });
+}
+
+  open = () => {
+      this.setState({ showModal: true });
+  }
+
   addRecipe = (value) => {
     var holder = this.state.recipes;
-    var temp = update(holder, {$push: [value]});
+    var temp = undefined;
+
+
+    this.state.existngRecipe == true ? temp = update(holder, {[holder.findIndex(el => el.title == value.title)]: {$set: value}}) : temp = update(holder, {$push: [value]})     
+
     localStorage.setItem('recipes', JSON.stringify(temp));
-    this.setState({recipes: temp});
+    this.setState({recipes: temp, existngRecipe: false});
   }
 
   editRecipe = (value) => {
     var getIt = this.state.recipes.filter(el => el.title == value);
-    this.setState({liveRecipe: getIt});
-    console.log('Booya')
+    this.setState({liveRecipe: getIt[0], showModal: true, existngRecipe: true});
     console.log(this.state.liveRecipe)
   }
 
@@ -62,8 +75,12 @@ class App extends Component {
           getIt = {this.editRecipe}/>   
         <ModalForm
           currentRecipe = {this.state.liveRecipe}
+          showModal = {this.state.showModal}
+          Check = {this.state.existngRecipe}
           AddRecipe = {this.addRecipe }
-          SetLive = {this.setLive} />
+          SetLive = {this.setLive}
+          Open = {this.open}
+          Close = {this.close} />
       </div>
     ) 
   }
