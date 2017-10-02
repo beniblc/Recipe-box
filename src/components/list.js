@@ -10,7 +10,7 @@ class RecipeList extends Component {
     recipeGenerator = (item) => item.map((recipe) => {
 
         return (
-            <Panel header={recipe.title} eventKey={recipe.title} key={recipe.title}>
+            <Panel header={recipe.title} eventKey={recipe.title} key={recipe.title} bsClass="card">
                 <h2>Ingredients</h2>
                 <ListGroup>
                     {recipe.ingredients.map((item)=> {

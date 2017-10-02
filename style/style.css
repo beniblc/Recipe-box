@@ -1,4 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display');
+
+
 .box1, .box2 {
     width:100%;
     z-index: 1;
+}
+
+.card {
+    font-family: Playfair Display, Sans-Serif;
 }
