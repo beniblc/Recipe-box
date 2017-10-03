@@ -69,9 +69,10 @@ class ModalForm extends Component {
             </Button>
 
             <Modal show={this.props.showModal} onHide={() => this.props.SetLive( {title: [], ingredients: [], instructions: []} ) || this.props.Close()}>
-                <Modal.Header>
+                <Modal.Header bsClass="modal-form">
                     <Modal.Title>
                         <input
+                            bsClass="modal-buttons"
                             id="Title" 
                             placeholder="Title"
                             name="title" 
@@ -80,20 +81,31 @@ class ModalForm extends Component {
                             onKeyPress={this.handleKeyPress}
                         />                        
                     </Modal.Title>
-                    <Button 
+                    <Button
+                        id="edit-buttons"
+                        bsClass="modal-buttons"
                         onClick={() => this.assignAttribute("Title")} 
                         bsSize="small">
                         Edit
                     </Button>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body bsClass="modal-form">
                     <h3>Ingredients</h3>
                     <ul>
                         {this.props.currentRecipe.ingredients.map((item)=> {
                             return (
                                 <form key={item}>
-                                    <li>{item}</li>
-                                    <Button bsSize="small" onClick={() => this.delete(item, 'ingredients')}>Delete</Button>
+                                    <li className="ing-items">{item}
+                                        <Button
+                                            bsClass="modal-buttons"
+                                            className="delete-button" 
+                                            bsSize="small" 
+                                            onClick={
+                                                () => this.delete(item, 'ingredients')
+                                            }>
+                                            Delete
+                                        </Button>
+                                    </li>
                                 </form>
                             )
                         })}
@@ -108,7 +120,10 @@ class ModalForm extends Component {
                             onChange={this.handleInputChange}
                             onKeyPress={this.handleKeyPress}
                         />
-                        <Button 
+                        <Button
+                            id="edit-buttons"
+                            bsClass="modal-buttons" 
+                            className="test" 
                             onClick={() => this.assignAttribute("Ingredient")} 
                             bsSize="small">
                             Add
@@ -120,13 +135,17 @@ class ModalForm extends Component {
                         {this.props.currentRecipe.instructions.map((item)=> {
                             return (
                                 <form key={item}>
-                                    <li>{item}</li>
-                                    <Button 
-                                        bsSize="small" 
-                                        onClick={
-                                            () => this.delete(item, 'instructions')
-                                        }>
-                                    Delete</Button>
+                                    <li className="ing-items">{item}
+                                        <Button
+                                            bsClass="modal-buttons"
+                                            className="delete-button" 
+                                            bsSize="small" 
+                                            onClick={
+                                                () => this.delete(item, 'instructions')
+                                            }>
+                                            Delete
+                                        </Button>
+                                    </li>
                                 </form>
                             )
                         })}
@@ -142,6 +161,7 @@ class ModalForm extends Component {
                             onKeyPress={this.handleKeyPress}
                         />
                         <Button
+                            bsClass="modal-buttons"
                             onClick={() => this.assignAttribute("Instruction")} 
                             bsSize="small">
                             Add
@@ -153,7 +173,8 @@ class ModalForm extends Component {
                             () => this.props.AddRecipe(this.props.currentRecipe)
                             || this.props.SetLive( {title: [], ingredients: [], instructions: []} )
                             || this.props.Close() 
-                        }       
+                        }
+                        bsClass="modal-buttons"       
                         onKeyPress={this.handleKeyPress}
                     >
                     Save</Button>

@@ -1,11 +1,88 @@
 @import url('https://fonts.googleapis.com/css?family=Playfair+Display');
 
 
+div .container{
+    font-family: Playfair Display, sans-serif;
+}
+
+/*-------------list--------------*/
+
+h2 {
+    margin-left: 10px;
+}
+
+.ingredients {
+    list-style: none;
+    padding-left: 20px;
+}
+
+li {
+    padding: 3px 0px 3px 0px;
+}
+
+ol li {
+    padding: 13px 0px 3px 0px;
+}
+
+.edit-buttons {
+    margin-left: 40px;
+}
+
+.list-button {
+    margin: 0px 5px 10px 0px;
+    text-decoration: none;
+    background-color: grey;
+    color: white;
+    border: none;
+    display: inline-block;
+}
+
+
+
+/*----------modal form ----------*/
 .box1, .box2 {
-    width:100%;
+    width:95%;
     z-index: 1;
 }
 
-.card {
-    font-family: Playfair Display, Sans-Serif;
+.modal-form {
+    margin-left: 20px;
+    font-family: Playfair Display, sans-serif;
 }
+
+.modal-form #Title{
+    margin-top: 20px;
+}
+
+.modal-form .add-button {
+    margin-top: 10px;
+}
+
+.modal-form li{
+    width: 95%;
+}
+
+.modal-buttons {
+    margin: 0px 5px 10px 0px;
+    text-decoration: none;
+    background-color: gainsboro;
+    color: black;
+    border: none;
+    display: inline-block;
+}
+
+.delete-button {
+    float: right;
+    margin-right: 10px;
+}
+
+.ing-items {
+    float:left;
+}
+
+#edit-buttons {
+    margin-top: 5px;
+}
+
+
+

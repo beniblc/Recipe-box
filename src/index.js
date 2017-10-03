@@ -104,12 +104,15 @@ class App extends Component {
       ingredients: [
         "Salmon",
         "Sea Salt",
+        "Sugar",
         "4 Table Spoons of Vodka",
         "Coriander",
         "Olive Oil",
         "Dill"
       ],
-      instructions: []
+      instructions: [
+        "Mix 1 cup of Sea Salt for 3/4 cups of Sugar."
+      ]
     }];
 }
 

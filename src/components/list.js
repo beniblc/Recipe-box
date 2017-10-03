@@ -10,12 +10,12 @@ class RecipeList extends Component {
     recipeGenerator = (item) => item.map((recipe) => {
 
         return (
-            <Panel header={recipe.title} eventKey={recipe.title} key={recipe.title} bsClass="card">
+            <Panel header={recipe.title} eventKey={recipe.title} key={recipe.title}>
                 <h2>Ingredients</h2>
                 <ListGroup>
                     {recipe.ingredients.map((item)=> {
                         return (
-                            <ListGroupItem key={item}>{item}</ListGroupItem>
+                            <ListGroupItem key={item} bsClass="ingredients">{item}</ListGroupItem>
                         )
                     })}
                 </ListGroup>
@@ -27,10 +27,10 @@ class RecipeList extends Component {
                         )
                     })}
                 </ol>
-                <ButtonGroup>
-                    <Button bsStyle="default" bsSize="small" onClick={() => this.props.getIt(recipe.title)}>edit</Button>
-                    <Button bsSize="small" onClick={this.delete.bind(this, recipe)}>delete</Button>
-                </ButtonGroup>
+                    <div className="edit-buttons">
+                        <Button bsClass="list-button" bsSize="small" onClick={() => this.props.getIt(recipe.title)}>edit</Button>
+                        <Button bsClass="list-button" bsSize="small" onClick={this.delete.bind(this, recipe)}>delete</Button>
+                    </div>
             </Panel>   
         )
     });
@@ -39,7 +39,7 @@ class RecipeList extends Component {
         return(
             <div>
                 <h1>Recipes</h1>
-                <Accordion>
+                <Accordion bsClass="card">
                     { this.recipeGenerator(this.props.Recipes) }
                 </Accordion>
             </div>
